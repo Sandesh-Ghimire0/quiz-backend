@@ -19,6 +19,8 @@ app.use(passport.initialize())
 
 import { userRouter } from './routes/user.route.js'
 import { googleRouter } from './routes/google.route.js'
+import { adminRouter } from './routes/admin.route.js'
 
 app.use('/api/user',userRouter)
 app.use('/auth',googleRouter)
+app.use('/api/admin', adminRouter)
