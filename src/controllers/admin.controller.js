@@ -9,7 +9,6 @@ const createQuestion = asyncHandler( async (req, res ) =>{
     const {questions} = req.body
     const admin_id = req.user.id
 
-    console.log(questions)
 
     if(!questions){
         throw new ApiError(400, "Questions can't be empty")
@@ -87,7 +86,6 @@ const updateQuestion = asyncHandler( async (req, res)=>{
     if(!question){
         throw new ApiError(500, "Question not availabe to update")
     }
-    console.log(question)
 
     /*  
         - deleting all the options at first so that duplicate option are not created (create command is being used in update)
