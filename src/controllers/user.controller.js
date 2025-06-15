@@ -6,7 +6,6 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 
 const fetchQuestions = asyncHandler( async (req, res )=>{
     const {noOfQuestions} = req.query
-    console.log(req.query)
 
     if(!noOfQuestions){
         throw new ApiError(400, "No of question is required")
@@ -14,12 +13,14 @@ const fetchQuestions = asyncHandler( async (req, res )=>{
 
 
     const total = await prisma.question.count()
-    console.log(total)
     const skip = Math.floor(Math.random() * (total - Number(noOfQuestions)));
 
     const questions = await prisma.question.findMany({
         skip:skip,
-        take:Number(noOfQuestions)
+        take:Number(noOfQuestions),
+        include:{
+            options:true
+        }
     })
 
     if(!questions){

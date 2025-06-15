@@ -164,9 +164,60 @@ const deleteQuestion = asyncHandler( async (req, res)=>{
 })
 
 
+const getAllUsers = asyncHandler( async (req, res)=>{
+    const users =await prisma.user.findMany()
+
+    if(!users){
+        throw new ApiError(500, "Unable to get all users data")
+    }
+
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(
+            200,
+            users,
+            "ALL users data fetched successfullly"
+        )
+    )
+})
+
+
+const deleteUser = asyncHandler( async (req, res)=>{
+    const userId = req.params.id
+
+    if(!userId){
+        throw new ApiError(400, "UserId not provided")
+    }
+
+    let success =false
+    await prisma.user.delete({
+        where:{id:userId}
+    })
+    success=true
+
+    if(!success){
+        throw new ApiError(400, "Failed to delete the user")
+    }
+
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(
+            200,
+            [],
+            "User deleted successfully !!!!"
+        )
+    )
+
+})
+
+
 export {
     createQuestion,
     getCreatedQuestions,
     updateQuestion,
-    deleteQuestion
+    deleteQuestion,
+    getAllUsers,
+    deleteUser
 }
