@@ -6,6 +6,9 @@ CREATE TABLE `User` (
     `password` VARCHAR(191) NULL,
     `googleId` VARCHAR(191) NULL,
     `role` ENUM('USER', 'ADMIN') NOT NULL DEFAULT 'USER',
+    `loginCount` INTEGER NULL,
+    `readCount` INTEGER NULL,
+    `testCount` INTEGER NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 

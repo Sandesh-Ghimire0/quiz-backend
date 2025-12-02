@@ -6,7 +6,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -22,6 +21,9 @@ model User {
     googleId  String?    @unique // Store Google-provided ID
     role      Role       @default(USER)
     questions Question[] // One admin can create many questions
+    loginCount Int?
+    readCount  Int?
+    testCount  Int?
     createdAt DateTime   @default(now())
     updatedAt DateTime   @updatedAt
 }
